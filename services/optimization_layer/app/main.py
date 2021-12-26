@@ -1,8 +1,11 @@
-from fastapi import FastAPI
+from fastapi import APIRouter
 
-app = FastAPI()
+router = APIRouter(
+    prefix="/optimization",
+    tags=["optimization"],
+    responses={404: {"description": "Not found"}},
+)
 
-
-@app.get("/")
+@router.get("/")
 async def root():
     return {"message": "Hello World"}
