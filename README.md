@@ -25,7 +25,7 @@ docker push localhost:5000/clientlayer
 
 ```
 minikube addons enable ingress
-kubectl apply -f ./k8s/minikube-ingress.yml
+<!-- kubectl apply -f ./k8s/minikube-ingress.yml -->
 # kubectl delete -A ValidatingWebhookConfiguration ingress-nginx-admission
 kubectl apply -f ./k8s
 kubectl delete -f ./k8s
