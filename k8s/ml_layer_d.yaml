@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mllayer
+  labels:
+    name: mllayer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mllayer
+  template:
+    metadata:
+      labels:
+        app: mllayer
+    spec:
+      containers:
+      - name: mllayer
+        image: localhost:5000/ml-layer
+      restartPolicy: Always

@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: applicationlayer
+  labels:
+    name: applicationlayer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: applicationlayer
+  template:
+    metadata:
+      labels:
+        app: applicationlayer
+    spec:
+      containers:
+      - name: applicationlayer
+        image: localhost:5000/application-layer
+      restartPolicy: Always

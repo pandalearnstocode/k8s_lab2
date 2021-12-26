@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: optimizationlayer
+  labels:
+    name: optimizationlayer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: optimizationlayer
+  template:
+    metadata:
+      labels:
+        app: optimizationlayer
+    spec:
+      containers:
+      - name: optimizationlayer
+        image: localhost:5000/optimization-layer
+      restartPolicy: Always
