@@ -2,7 +2,7 @@ FROM python:3.8-slim-buster AS builder
 ENV PATH=/root/.local:/root/.local/bin:/install:$PATH
 WORKDIR /app
 RUN pip install --upgrade pip
-RUN pip install --user --upgrade streamlit
+RUN pip install --user --upgrade streamlit httpx
 COPY app /app
 FROM python:3.8-slim-buster AS app
 COPY --from=builder /root/.local /root/.local

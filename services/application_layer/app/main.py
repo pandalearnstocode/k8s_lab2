@@ -1,11 +1,8 @@
-from fastapi import APIRouter
+from fastapi import FastAPI, Request
 
-router = APIRouter(
-    prefix="/application",
-    tags=["application"],
-    responses={404: {"description": "Not found"}},
-)
+app = FastAPI(root_path="/application_layer")
 
-@router.get("/")
-async def root():
-    return {"message": "Hello World"}
+
+@app.get("/app")
+def read_main(request: Request):
+    return {"ping": "pong", "root_path": request.scope.get("root_path")}
