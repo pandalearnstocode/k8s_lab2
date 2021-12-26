@@ -5,22 +5,26 @@ docker run --rm -it --network=host alpine ash -c "apk add socat && socat TCP-LIS
 ```
 
 ```
-docker build -t localhost:5000/utility-layer ./services/utility_layer
-docker push localhost:5000/utility-layer
-docker build -t localhost:5000/data-layer ./services/data_layer
-docker push localhost:5000/data-layer
-docker build -t localhost:5000/ml-layer ./services/ml_layer
-docker push localhost:5000/ml-layer
-docker build -t localhost:5000/optimization-layer ./services/optimization_layer
-docker push localhost:5000/optimization-layer
-docker build -t localhost:5000/application-layer ./services/application_layer
-docker push localhost:5000/application-layer
-docker build -t localhost:5000/client-layer ./services/client_layer
-docker push localhost:5000/client-layer
+docker build -t localhost:5000/utilitylayer ./services/utilitylayer
+docker build -t localhost:5000/mllayer ./services/mllayer
+docker build -t localhost:5000/datalayer ./services/datalayer
+docker build -t localhost:5000/optimizationlayer ./services/optimizationlayer
+docker build -t localhost:5000/applicationlayer ./services/applicationlayer
+docker build -t localhost:5000/clientlayer ./services/clientlayer
+```
+
+```
+docker push localhost:5000/utilitylayer
+docker push localhost:5000/datalayer
+docker push localhost:5000/mllayer
+docker push localhost:5000/optimizationlayer
+docker push localhost:5000/applicationlayer
+docker push localhost:5000/clientlayer
 ```
 
 
 ```
+minikube addons enable ingress
 kubectl apply -f ./k8s/minikube-ingress.yml
 # kubectl delete -A ValidatingWebhookConfiguration ingress-nginx-admission
 kubectl apply -f ./k8s

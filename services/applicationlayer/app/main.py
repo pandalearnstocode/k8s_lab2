@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Request
 
-app = FastAPI(root_path="/ml_layer")
+app = FastAPI(root_path="/applicationlayer")
 
 
 @app.get("/app")

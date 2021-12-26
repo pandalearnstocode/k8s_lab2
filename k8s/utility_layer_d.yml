@@ -16,5 +16,5 @@ spec:
     spec:
       containers:
       - name: utilitylayer
-        image: localhost:5000/utility-layer
+        image: localhost:5000/utilitylayer
       restartPolicy: Always

@@ -16,5 +16,5 @@ spec:
     spec:
       containers:
       - name: applicationlayer
-        image: localhost:5000/application-layer
+        image: localhost:5000/applicationlayer
       restartPolicy: Always

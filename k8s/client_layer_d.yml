@@ -16,5 +16,5 @@ spec:
     spec:
       containers:
       - name: clientlayer
-        image: localhost:5000/client-layer
+        image: localhost:5000/clientlayer
       restartPolicy: Always

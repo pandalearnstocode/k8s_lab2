@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Request
 
-app = FastAPI(root_path="/utility_layer")
+app = FastAPI(root_path="/optimizationlayer")
 
 
 @app.get("/app")

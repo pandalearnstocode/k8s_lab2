@@ -16,5 +16,5 @@ spec:
     spec:
       containers:
       - name: mllayer
-        image: localhost:5000/ml-layer
+        image: localhost:5000/mllayer
       restartPolicy: Always

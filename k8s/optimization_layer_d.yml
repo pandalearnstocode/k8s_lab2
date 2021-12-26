@@ -16,5 +16,5 @@ spec:
     spec:
       containers:
       - name: optimizationlayer
-        image: localhost:5000/optimization-layer
+        image: localhost:5000/optimizationlayer
       restartPolicy: Always

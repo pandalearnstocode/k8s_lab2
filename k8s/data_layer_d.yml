@@ -16,5 +16,5 @@ spec:
     spec:
       containers:
       - name: datalayer
-        image: localhost:5000/data-layer
+        image: localhost:5000/datalayer
       restartPolicy: Always
