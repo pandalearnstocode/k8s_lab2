@@ -12,13 +12,41 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: vue
+            name: clientlayer
             port:
-              number: 8080
-      - path: /books
+              number: 8501
+      - path: /application
         pathType: Prefix
         backend:
           service:
-            name: flask
+            name: applicationlayer
             port:
-              number: 5000
+              number: 8000
+      - path: /data
+        pathType: Prefix
+        backend:
+          service:
+            name: datalayer
+            port:
+              number: 8001
+      - path: /ml
+        pathType: Prefix
+        backend:
+          service:
+            name: mllayer
+            port:
+              number: 8002
+      - path: /optimization
+        pathType: Prefix
+        backend:
+          service:
+            name: optimizationlayer
+            port:
+              number: 8003
+      - path: /utility
+        pathType: Prefix
+        backend:
+          service:
+            name: utilitylayer
+            port:
+              number: 8004
