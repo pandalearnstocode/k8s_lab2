@@ -1,0 +1,34 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: applicationlayer
+  labels:
+    name: applicationlayer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: applicationlayer
+  template:
+    metadata:
+      labels:
+        app: applicationlayer
+    spec:
+      containers:
+      - name: applicationlayer
+        image: localhost:5000/applicationlayer
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: applicationlayer
+  labels:
+    service: applicationlayer
+spec:
+  selector:
+    app: applicationlayer
+  ports:
+  - port: 8000
+    targetPort: 8000

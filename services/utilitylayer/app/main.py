@@ -1,8 +1,19 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
 
-app = FastAPI(root_path="/utilitylayer")
+app = FastAPI()
 
 
-@app.get("/app")
-def read_main(request: Request):
-    return {"ping": "pong", "root_path": request.scope.get("root_path")}
+@app.get("/")
+def read_main():
+    return {"ping": "pong", "root_path": "utilitylayer"}
+
+
+subapi = FastAPI()
+
+
+@subapi.get("/app")
+def read_sub():
+    return {"ping": "pong", "root_path": "utilitylayer/app"}
+
+
+app.mount("/utilitylayer", subapi)

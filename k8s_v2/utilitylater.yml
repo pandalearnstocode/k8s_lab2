@@ -1,0 +1,34 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: utilitylayer
+  labels:
+    name: utilitylayer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: utilitylayer
+  template:
+    metadata:
+      labels:
+        app: utilitylayer
+    spec:
+      containers:
+      - name: utilitylayer
+        image: localhost:5000/utilitylayer
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: utilitylayer
+  labels:
+    service: utilitylayer
+spec:
+  selector:
+    app: utilitylayer
+  ports:
+  - port: 8004
+    targetPort: 8004

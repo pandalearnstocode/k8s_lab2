@@ -1,0 +1,34 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: datalayer
+  labels:
+    name: datalayer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: datalayer
+  template:
+    metadata:
+      labels:
+        app: datalayer
+    spec:
+      containers:
+      - name: datalayer
+        image: localhost:5000/datalayer
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: datalayer
+  labels:
+    service: datalayer
+spec:
+  selector:
+    app: datalayer
+  ports:
+  - port: 8001
+    targetPort: 8001

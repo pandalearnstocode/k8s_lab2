@@ -1,0 +1,34 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mllayer
+  labels:
+    name: mllayer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mllayer
+  template:
+    metadata:
+      labels:
+        app: mllayer
+    spec:
+      containers:
+      - name: mllayer
+        image: localhost:5000/mllayer
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mllayer
+  labels:
+    service: mllayer
+spec:
+  selector:
+    app: mllayer
+  ports:
+  - port: 8002
+    targetPort: 8002

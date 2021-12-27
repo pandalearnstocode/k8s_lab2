@@ -1,0 +1,34 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: optimizationlayer
+  labels:
+    name: optimizationlayer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: optimizationlayer
+  template:
+    metadata:
+      labels:
+        app: optimizationlayer
+    spec:
+      containers:
+      - name: optimizationlayer
+        image: localhost:5000/optimizationlayer
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: optimizationlayer
+  labels:
+    service: optimizationlayer
+spec:
+  selector:
+    app: optimizationlayer
+  ports:
+  - port: 8003
+    targetPort: 8003
