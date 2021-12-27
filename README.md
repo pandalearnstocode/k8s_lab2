@@ -39,21 +39,14 @@ minikube addons enable ingress
 tilt up
 ```
 
-
+```
+kubectl exec postgres-5dd464f98c-4nzcc --stdin --tty -- createdb -U sample books
+kubectl exec postgres-5dd464f98c-4nzcc --stdin --tty -- psql -U sample
+```
 
 ```
 minikube stop
 minikube delete --all
-```
-
-`docker system prune --all`
-
-```
-alias docker-clean=' \
-  docker container prune -f ; \
-  docker image prune -f ; \
-  docker network prune -f ; \
-  docker volume prune -f '
 ```
 
 
@@ -68,10 +61,13 @@ alias docker-clean=' \
 * Jobs
 * Celery
 * Rabbit MQ
-* Grafana
-* Prometheus
+* Grafana : Done
+* Prometheus : Done
 * Follower
 * Redis Dashboard
 * DB
 * DB monitor
 * Load test
+
+
+I have changed deployment and service of postgres from postgres to postgres-deployment and postgres-service respectively.

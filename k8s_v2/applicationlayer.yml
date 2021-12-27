@@ -18,6 +18,17 @@ spec:
       containers:
       - name: applicationlayer
         image: applicationlayer
+        env:
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: postgres-credentials
+              key: user
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-credentials
+              key: password
       restartPolicy: Always
 ---
 apiVersion: v1
