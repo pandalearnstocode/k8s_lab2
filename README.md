@@ -5,6 +5,7 @@ docker run --rm -it --network=host alpine ash -c "apk add socat && socat TCP-LIS
 ```
 
 ```
+minikube dashboard
 docker build -t localhost:5000/utilitylayer ./services/utilitylayer
 docker build -t localhost:5000/mllayer ./services/mllayer
 docker build -t localhost:5000/datalayer ./services/datalayer
