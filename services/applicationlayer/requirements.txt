@@ -2,3 +2,4 @@ fastapi
 uvicorn
 fastapi-redis-cache
 sqlalchemy
+starlette_prometheus

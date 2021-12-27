@@ -4,10 +4,12 @@ from fastapi import FastAPI, Request, Response
 from fastapi_redis_cache import FastApiRedisCache, cache
 from sqlalchemy.orm import Session
 import time
-
+from starlette_prometheus import metrics, PrometheusMiddleware
 LOCAL_REDIS_URL = "redis://redis-service:6379"
 
 app = FastAPI(title="FastAPI Redis Cache Example")
+app.add_middleware(PrometheusMiddleware)
+app.add_route("/metrics", metrics)
 
 @app.on_event("startup")
 def startup():

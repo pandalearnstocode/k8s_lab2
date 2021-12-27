@@ -35,6 +35,7 @@ kubectl delete -f ./k8s
 
 ```
 minikube start
+minikube addons enable ingress
 tilt up
 ```
 
@@ -69,3 +70,8 @@ alias docker-clean=' \
 * Rabbit MQ
 * Grafana
 * Prometheus
+* Follower
+* Redis Dashboard
+* DB
+* DB monitor
+* Load test
