@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: clientlayer
+  name: clientlayer-deployment
   labels:
     name: clientlayer
 spec:
@@ -17,18 +17,18 @@ spec:
     spec:
       containers:
       - name: clientlayer
-        image: localhost:5000/clientlayer
+        image: clientlayer
       restartPolicy: Always
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: clientlayer
+  name: clientlayer-service
   labels:
     service: clientlayer
 spec:
   selector:
     app: clientlayer
   ports:
-  - port: 8501
-    targetPort: 8501
+  - port: 80
+    targetPort: 80

@@ -12,41 +12,41 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: clientlayer
+            name: clientlayer-service
             port:
-              number: 8501
+              number: 80
       - path: /applicationlayer
         pathType: Prefix
         backend:
           service:
-            name: applicationlayer
+            name: applicationlayer-service
             port:
               number: 8000
       - path: /datalayer
         pathType: Prefix
         backend:
           service:
-            name: datalayer
+            name: datalayer-service
             port:
               number: 8001
       - path: /mllayer
         pathType: Prefix
         backend:
           service:
-            name: mllayer
+            name: mllayer-service
             port:
               number: 8002
       - path: /optimizationlayer
         pathType: Prefix
         backend:
           service:
-            name: optimizationlayer
+            name: optimizationlayer-service
             port:
               number: 8003
       - path: /utilitylayer
         pathType: Prefix
         backend:
           service:
-            name: utilitylayer
+            name: utilitylayer-service
             port:
               number: 8004

@@ -13,7 +13,6 @@ if application_submit:
     st.write(f'hello {r.text}')
 
 
-
 data_form = st.form(key='data-layer')
 data_name = data_form.text_input('Enter your name')
 data_submit = data_form.form_submit_button('Submit')

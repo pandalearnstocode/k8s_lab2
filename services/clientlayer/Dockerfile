@@ -10,6 +10,6 @@ COPY --from=builder /app/main.py /app/main.py
 ENV PATH=/root/.local:/root/.local/bin:$PATH
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
-EXPOSE 8501
+EXPOSE 80
 WORKDIR /app
-CMD streamlit run main.py
+CMD streamlit run main.py --server.address="0.0.0.0" --server.port="80"

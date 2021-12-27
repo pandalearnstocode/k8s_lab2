@@ -34,8 +34,25 @@ kubectl delete -f ./k8s
 
 
 ```
+minikube start
+tilt up
+```
+
+
+
+```
 minikube stop
 minikube delete --all
+```
+
+`docker system prune --all`
+
+```
+alias docker-clean=' \
+  docker container prune -f ; \
+  docker image prune -f ; \
+  docker network prune -f ; \
+  docker volume prune -f '
 ```
 
 

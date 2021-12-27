@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: optimizationlayer
+  name: optimizationlayer-deployment
   labels:
     name: optimizationlayer
 spec:
@@ -17,13 +17,13 @@ spec:
     spec:
       containers:
       - name: optimizationlayer
-        image: localhost:5000/optimizationlayer
+        image: optimizationlayer
       restartPolicy: Always
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: optimizationlayer
+  name: optimizationlayer-service
   labels:
     service: optimizationlayer
 spec:

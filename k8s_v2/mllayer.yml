@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mllayer
+  name: mllayer-deployment
   labels:
     name: mllayer
 spec:
@@ -17,13 +17,13 @@ spec:
     spec:
       containers:
       - name: mllayer
-        image: localhost:5000/mllayer
+        image: mllayer
       restartPolicy: Always
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: mllayer
+  name: mllayer-service
   labels:
     service: mllayer
 spec:
