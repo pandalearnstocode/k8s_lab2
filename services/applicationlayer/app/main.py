@@ -3,6 +3,7 @@ import os
 from fastapi import FastAPI, Request, Response
 from fastapi_redis_cache import FastApiRedisCache, cache
 from sqlalchemy.orm import Session
+import time
 
 LOCAL_REDIS_URL = "redis://redis-service:6379"
 
@@ -32,17 +33,20 @@ def read_sub():
 
 @subapi.get("/data_no_cache")
 def get_data():
+    time.sleep(10)
     return {"success": True, "message": "this data is not cacheable, for... you know, reasons"}
 
 # Will be cached for one year
 @subapi.get("/immutable_data")
 @cache()
 async def get_immutable_data():
+    time.sleep(10)
     return {"success": True, "message": "this data can be cached indefinitely"}
 
 @subapi.get("/dynamic_data")
 @cache(expire=30)
 def get_dynamic_data(request: Request, response: Response):
+    time.sleep(10)
     return {"success": True, "message": "this data should only be cached temporarily"}
 
 app.mount("/applicationlayer", subapi)

@@ -60,3 +60,12 @@ alias docker-clean=' \
 * https://testdriven.io/blog/running-flask-on-kubernetes/
 * https://minikube.sigs.k8s.io/docs/handbook/registry/
 * https://github.com/4OH4/kubernetes-fastapi/
+
+
+# Pending:
+
+* Jobs
+* Celery
+* Rabbit MQ
+* Grafana
+* Prometheus

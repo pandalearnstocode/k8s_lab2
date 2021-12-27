@@ -21,7 +21,7 @@ application_submit_1= application_form_1.form_submit_button('Submit')
 
 
 if application_submit_1:
-    r = httpx.get('http://hello.world/applicationlayer/data_no_cache')
+    r = httpx.get('http://hello.world/applicationlayer/data_no_cache', timeout=20.0)
     st.write(f'hello {r.text}')
 
 st.write('Application Layer: CACHE')
@@ -30,7 +30,7 @@ application_submit_2 = application_form_2.form_submit_button('Submit')
 
 
 if application_submit_2:
-    r = httpx.get('http://hello.world/applicationlayer/immutable_data')
+    r = httpx.get('http://hello.world/applicationlayer/immutable_data', timeout=20.0)
     st.write(f'hello {r.text}')
 
 st.write('Application Layer: CACHE 30 MINS')
@@ -39,7 +39,7 @@ application_form_3 = st.form(key='application-layer-check-redis-3')
 application_submit_3 = application_form_3.form_submit_button('Submit')
 
 if application_submit_3:
-    r = httpx.get('http://hello.world/applicationlayer/dynamic_data')
+    r = httpx.get('http://hello.world/applicationlayer/dynamic_data', timeout=20.0)
     st.write(f'hello {r.text}')
 # ##############################################################################
 
