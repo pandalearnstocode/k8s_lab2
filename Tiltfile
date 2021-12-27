@@ -1,4 +1,4 @@
-services = ['applicationlayer', 'clientlayer', 'datalayer', 'ingress', 'mllayer','utilitylater','optimizationlayer']
+services = ['applicationlayer', 'clientlayer', 'datalayer', 'ingress', 'mllayer','utilitylater','optimizationlayer','cachelayer']
 yaml_files = ["k8s_v2/%s.yml" % service for service in services]
 
 k8s_yaml(yaml_files)
