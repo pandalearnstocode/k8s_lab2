@@ -54,6 +54,14 @@ minikube delete --all
 * https://testdriven.io/blog/running-flask-on-kubernetes/
 * https://minikube.sigs.k8s.io/docs/handbook/registry/
 * https://github.com/4OH4/kubernetes-fastapi/
+* https://fastapi.tiangolo.com/advanced/sub-applications/
+* http://richard.to/programming/fast-api-postgres-redis-kubernetes.html
+* https://github.com/richard-to/kubernetes-experiments
+* https://pypi.org/project/fastapi-redis-cache/
+* https://github.com/Kludex/fastapi-microservices/
+* https://www.kisphp.com/postgres/run-postgres11-and-pgadmin4-in-kubernetes-for-testing
+* https://medium.com/swlh/fastapi-microservice-patterns-application-monitoring-49fcb7341d9a
+* https://github.com/fkromer/fastapi-microservice-patterns/blob/main/application-metrics/service-a/app/main.py
 
 
 # Pending:
