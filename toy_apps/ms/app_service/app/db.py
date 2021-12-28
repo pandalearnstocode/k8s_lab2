@@ -1,14 +1,10 @@
-import os
-
 from sqlmodel import SQLModel
 
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
+from app.config import PROJECT_DATABASE_URL
 
-
-DATABASE_URL = os.environ.get("DATABASE_URL")
-
-engine = create_async_engine(DATABASE_URL, echo=True, future=True)
+engine = create_async_engine(PROJECT_DATABASE_URL, echo=True, future=True)
 
 
 async def init_db():

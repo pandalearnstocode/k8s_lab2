@@ -21,5 +21,9 @@ It will have access to:
 
 ```
 # Data Lib
-python -m pip install -e . && python -c 'import datalib as datalib; print(datalib.core.useful_function())'
+python -m pip install -e . && python -c 'import datalib as datalib; print(datalib.datalib.core.useful_function())'
 ```
+
+## REQUIRED ENV VARIABLES:
+
+* `PROJECT_DATABASE_URL`

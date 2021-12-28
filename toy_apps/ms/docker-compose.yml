@@ -19,8 +19,8 @@ services:
       - ./app_service:/usr/src/app
     ports:
       - 8004:8000
-    environment:
-      - DATABASE_URL=postgresql+asyncpg://pguser:pgpassword@project_db_service:5432/project_db
+    env_file: 
+      - .env
     depends_on:
       - project_db_service
   project_db_service:
@@ -37,20 +37,15 @@ services:
       - POSTGRES_USER=pguser
       - POSTGRES_PASSWORD=pgpassword
       - POSTGRES_DB=datalake_db
-  utils_service:
-    build: ./utils_service
-    container_name: utils_service
+  data_service:
+    build: ./data_service
+    container_name: data_service
     command: uvicorn app.main:app --reload --workers 1 --host 0.0.0.0 --port 8000
     volumes:
-      - ./utils_service:/usr/src/app
+      - ./data_service:/usr/src/app
     ports:
       - 8003:8000
-    environment:
-      - DATABASE_URL=postgresql://pguser:pgpassword@datalake_db_service:5432/datalake_db
-      - DATABASE_NAME=dwd
-      - DATABASE_HOST=project_db
-      - DATABASE_USER_NAME=pguser
-      - DATABASE_PASSWORD=pgpassword
-      - DATABASE_PORT=5432
+    env_file: 
+      - .env
     depends_on:
       - datalake_db_service
