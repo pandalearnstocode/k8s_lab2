@@ -2,13 +2,17 @@ version: '3.8'
 
 services:
   client_service:
+    container_name: client_service
     build: ./client_service
     command: streamlit run app/main.py --server.address="0.0.0.0" --server.port="80"
+    env_file: 
+      - .env
     volumes:
       - ./client_service:/usr/src/app
     ports:
       - 80:80
   app_service:
+    container_name: app_service
     build: ./app_service
     command: uvicorn app.main:app --reload --workers 1 --host 0.0.0.0 --port 8000
     volumes:
@@ -16,34 +20,37 @@ services:
     ports:
       - 8004:8000
     environment:
-      - DATABASE_URL=postgresql+asyncpg://pguser:pgpassword@project_db:5432/foo
+      - DATABASE_URL=postgresql+asyncpg://pguser:pgpassword@project_db_service:5432/project_db
     depends_on:
-      - project_db
-  project_db:
+      - project_db_service
+  project_db_service:
+    container_name: project_db_service
     image: postgres:13.4
     environment:
       - POSTGRES_USER=pguser
       - POSTGRES_PASSWORD=pgpassword
-      - POSTGRES_DB=foo
-  datalake_db:
+      - POSTGRES_DB=project_db
+  datalake_db_service:
     image: postgres:13.4
+    container_name: datalake_db_service
     environment:
       - POSTGRES_USER=pguser
       - POSTGRES_PASSWORD=pgpassword
-      - POSTGRES_DB=dwd
+      - POSTGRES_DB=datalake_db
   utils_service:
     build: ./utils_service
+    container_name: utils_service
     command: uvicorn app.main:app --reload --workers 1 --host 0.0.0.0 --port 8000
     volumes:
       - ./utils_service:/usr/src/app
     ports:
       - 8003:8000
     environment:
-      - DATABASE_URL=postgresql://pguser:pgpassword@project_db:5432/dwd
+      - DATABASE_URL=postgresql://pguser:pgpassword@datalake_db_service:5432/datalake_db
       - DATABASE_NAME=dwd
       - DATABASE_HOST=project_db
       - DATABASE_USER_NAME=pguser
       - DATABASE_PASSWORD=pgpassword
       - DATABASE_PORT=5432
     depends_on:
-      - project_db
+      - datalake_db_service
