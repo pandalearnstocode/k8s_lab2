@@ -1,9 +1,9 @@
 import redis
 
 from app.worker import celery
-from app.config import REDIS_STORE_CONN_URI
+from app.config import CACHE_REDIS_URL
 
-redis_store = redis.Redis.from_url(REDIS_STORE_CONN_URI)
+redis_store = redis.Redis.from_url(CACHE_REDIS_URL)
 
 
 @celery.task

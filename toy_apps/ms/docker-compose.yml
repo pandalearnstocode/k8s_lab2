@@ -91,3 +91,37 @@ services:
         - "5672:5672"
     env_file: 
       - .env
+  ml_service:
+    build: ./ml_service
+    container_name: ml_service
+    command: gunicorn --bind 0.0.0.0:8000 app.main:app -w 1 -k uvicorn.workers.UvicornWorker --access-logfile - --error-logfile - --log-level info
+    volumes:
+      - ./ml_service:/usr/src/app
+    ports:
+      - 8002:8000
+    env_file: 
+      - .env
+  celery_service:
+    build: ./celery
+    container_name: celery_service
+    command: celery worker -A app.tasks --loglevel=info
+    volumes:
+      - ./ml_service/app:/usr/src/app/app
+    env_file: 
+      - .env
+    depends_on:
+      - rabbitmq_service
+      - redis_service
+  flower_service:
+    build: ./flower
+    container_name: flower_service
+    command: celery flower -A app.tasks --broker=amqp://guest:guest@rabbitmq_service:5672//
+    volumes:
+      - ./ml_service/app:/usr/src/app/app
+    env_file: 
+      - .env
+    depends_on:
+      - rabbitmq_service
+      - redis_service
+    ports:
+      - 5555:5555
