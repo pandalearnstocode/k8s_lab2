@@ -22,3 +22,24 @@
 * __ML/Data/Utils library__
 * __Ingress controller__
 * __CI/CD__
+
+
+### Workflow:
+
+1. user enters user email and password from client
+2. call reaches application service, it checks in project db the user id is present or not, if yes sends valid user.
+3. client gets the response and unlocks further steps
+
+
+4. as next step user wants to get data for a country, he/she selects country from drop down. click submit. call goes to data layer.
+5. data layer fetch the data from raw data db, sends it back to client as json.
+6. by looking at the data user wants to aggregate the data data, he/she selects aggregation level and send it to utils layer.
+7. util layer apply aggregation to the data using some function from utils library and return the data to the client.
+8. after the aggregate data is received the sends the data t ml layer to run some model.
+9.  ml layer takes the data and put it in a queue which will be sent to a celery working using rabbit mq. once the jobs are running this status will be visible in flower. the function to run this workload will come from ml library.
+10. once this result is generated it will be stored in a redis cache so that if there is a same call with the same payload this should not run twice. it should show result from the cache in memory storage. if the in memory storage has expired it should call the db to fetch the information.
+11. now, once client has to post modelling data, it may want to report a image for fit chart, in that case the client will call the reporting layer.
+12. reporting layer will get all the data and will create a fit chart to show in the ui. it will send this data back to client.
+13. Client will show the data using charting library. 
+
+* https://realpython.com/introduction-to-flask-part-2-creating-a-login-page/

@@ -79,3 +79,18 @@ minikube delete --all
 
 
 I have changed deployment and service of postgres from postgres to postgres-deployment and postgres-service respectively.
+
+### Add this in wiki
+
+
+```
+The first (and only required) parameter inside create_engine() is the database url. Typically it takes the form dialect+driver://username:password@host:port/database. In our case, dialect is sqlite hence the sqlite:// bit. The additional /todooo.db bit specifies the location of the database. Of course, our sqlite database hasn’t been created yet, but this is where it will be. Note that this path is relative to the working directory.
+
+In a production setting, the call to create_engine() might look more like engine = create_engine('postgresql+psycopg2://scott:tiger@localhost/mydatabase') or engine = create_engine('mysql://scott:tiger@localhost/foo')
+```
+
+ref:
+* https://docs.sqlalchemy.org/en/14/core/engines.html#database-urls
+* https://www.gormanalysis.com/blog/building-a-simple-crud-application-with-fastapi/#sqlalchemy-engine
+
+
