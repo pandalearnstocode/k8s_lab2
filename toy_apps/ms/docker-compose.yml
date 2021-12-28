@@ -75,9 +75,19 @@ services:
     env_file: 
       - .env
   redis_service:
-    image: redis
+    image: redis:latest
     container_name: redis_service
     ports:
       - "6379:6379"
+    env_file: 
+      - .env
+  rabbitmq_service:
+    hostname: rabbitmq_service
+    container_name: rabbitmq_service
+    image: rabbitmq:latest
+    volumes:
+        - "./rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf"
+    ports:
+        - "5672:5672"
     env_file: 
       - .env
