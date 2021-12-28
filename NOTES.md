@@ -33,6 +33,10 @@
 
 4. as next step user wants to get data for a country, he/she selects country from drop down. click submit. call goes to data layer.
 5. data layer fetch the data from raw data db, sends it back to client as json.
+
+docker exec -it d7e6eb3cb69a psql -U pguser dwd
+
+
 6. by looking at the data user wants to aggregate the data data, he/she selects aggregation level and send it to utils layer.
 7. util layer apply aggregation to the data using some function from utils library and return the data to the client.
 8. after the aggregate data is received the sends the data t ml layer to run some model.
