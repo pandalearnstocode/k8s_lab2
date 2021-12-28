@@ -27,8 +27,8 @@ async def foo_generate_data(country: str):
     return {"Message": "Data generated"}
 
 
-@app.get("/pull_data/{country}")
-async def foo_pull_data(session: AsyncSession = Depends(get_session)):
+# @app.get("/pull_data/{country}")
+# async def foo_pull_data(session: AsyncSession = Depends(get_session)):
     # result = await session.execute(select(User))
     # users = result.scalars().all()
     # return [User(email=user.email, password=user.password, id=user.id) for user in users]
