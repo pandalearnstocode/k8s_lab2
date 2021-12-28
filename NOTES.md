@@ -59,3 +59,13 @@ https://stackoverflow.com/questions/44284484/docker-compose-share-named-volume-b
 Q. Is it possible check redis cache is working as expected?
 * https://itnext.io/an-easy-to-use-monitoring-solution-for-redis-5a8a73d56129
 * https://github.com/Einsteinish/Docker-Compose-Prometheus-and-Grafana
+
+
+__Required subdomains:__
+
+
+* app.myrandomapp.online
+* monitoring.myrandomapp.online
+* logs.myrandomapp.online
+* dbmonitoring.randomapp.online
+* prometheus.myrandomapp.online
