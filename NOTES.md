@@ -38,6 +38,10 @@ docker exec -it d7e6eb3cb69a psql -U pguser dwd
 
 
 6. by looking at the data user wants to aggregate the data data, he/she selects aggregation level and send it to utils layer.
+
+https://stackoverflow.com/questions/44284484/docker-compose-share-named-volume-between-multiple-containers
+
+
 7. util layer apply aggregation to the data using some function from utils library and return the data to the client.
 8. after the aggregate data is received the sends the data t ml layer to run some model.
 9.  ml layer takes the data and put it in a queue which will be sent to a celery working using rabbit mq. once the jobs are running this status will be visible in flower. the function to run this workload will come from ml library.
