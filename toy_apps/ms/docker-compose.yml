@@ -49,3 +49,28 @@ services:
       - .env
     depends_on:
       - datalake_db_service
+  prometheus_service:
+    image: prom/prometheus:latest
+    restart: unless-stopped
+    container_name: prometheus_service
+    ports:
+      - 9090:9090
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+    depends_on:
+      - app_service
+  grafana_service:
+    image: grafana/grafana:latest
+    restart: unless-stopped
+    user: "472"
+    container_name: grafana_service
+    depends_on:
+      - prometheus_service
+    ports:
+      - 3000:3000
+    volumes:
+      - ./grafana/datasource.yml:/etc/grafana/provisioning/datasource.yml
+    env_file: 
+      - .env

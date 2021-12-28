@@ -4,9 +4,12 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from typing import List
 from app.db import get_session, init_db
 from app.models import User, UserCreate
+from fastapi.middleware.cors import CORSMiddleware
+from prometheus_fastapi_instrumentator import Instrumentator
+
 
 app = FastAPI()
-
+Instrumentator().instrument(app).expose(app)
 
 @app.on_event("startup")
 async def on_startup():
