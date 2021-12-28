@@ -12,3 +12,7 @@ if application_submit:
     login_data = {"email": application_email,"password":application_password}
     r = requests.post(url, data=json.dumps(login_data))
     st.write(f'hello {r.text}')
+
+
+option = st.selectbox('How would you like to be contacted?', ('brazil', 'us', 'uk'))
+st.write('You selected:', option)
