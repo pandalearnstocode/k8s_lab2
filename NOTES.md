@@ -51,3 +51,11 @@ https://stackoverflow.com/questions/44284484/docker-compose-share-named-volume-b
 13. Client will show the data using charting library. 
 
 * https://realpython.com/introduction-to-flask-part-2-creating-a-login-page/
+* https://medium.com/swlh/fastapi-microservice-patterns-application-monitoring-49fcb7341d9a
+* https://towardsdatascience.com/generating-fake-data-with-pandas-very-quickly-b99467d4c618
+* https://github.com/Kludex/fastapi-prometheus-grafana/blob/master/docker-compose.yaml
+
+
+Q. Is it possible check redis cache is working as expected?
+* https://itnext.io/an-easy-to-use-monitoring-solution-for-redis-5a8a73d56129
+* https://github.com/Einsteinish/Docker-Compose-Prometheus-and-Grafana

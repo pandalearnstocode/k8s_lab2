@@ -74,3 +74,10 @@ services:
       - ./grafana/datasource.yml:/etc/grafana/provisioning/datasource.yml
     env_file: 
       - .env
+  redis_service:
+    image: redis
+    container_name: redis_service
+    ports:
+      - "6379:6379"
+    env_file: 
+      - .env
