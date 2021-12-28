@@ -27,3 +27,27 @@ services:
       - POSTGRES_USER=pguser
       - POSTGRES_PASSWORD=pgpassword
       - POSTGRES_DB=foo
+  data_db:
+    image: postgres:13.4
+    expose:
+      - 5433
+    environment:
+      - POSTGRES_USER=pguser
+      - POSTGRES_PASSWORD=pgpassword
+      - POSTGRES_DB=dwd
+  utils:
+    build: ./utils
+    command: uvicorn app.main:app --reload --workers 1 --host 0.0.0.0 --port 8000
+    volumes:
+      - ./utils:/usr/src/app
+    ports:
+      - 8003:8000
+    environment:
+      - DATABASE_URL=postgresql://pguser:pgpassword@data_db:5432/dwd
+      - DATABASE_NAME=dwd
+      - DATABASE_HOST=data_db
+      - DATABASE_USER_NAME=pguser
+      - DATABASE_PASSWORD=pgpassword
+      - DATABASE_PORT=5432
+    depends_on:
+      - data_db

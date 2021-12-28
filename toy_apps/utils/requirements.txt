@@ -1,4 +1,5 @@
-asyncpg==0.24.0
+psycopg2-binary==2.9.1
 fastapi==0.68.1
-sqlmodel==0.0.4
+pandas
 uvicorn==0.15.0
+SQLAlchemy

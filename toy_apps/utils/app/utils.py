@@ -54,10 +54,10 @@ def generate_fake_dataframe(size, cols, col_names = None, intervals = None, seed
     return df
 
 
-def pandas_to_sql(dburi, df):
+def pandas_to_sql(dburi, df, table_name):
     df.to_sql(
         con=dburi,
-        name="testdrive",
+        name=table_name,
         if_exists="replace",
         index=False,
         #method="multi",
