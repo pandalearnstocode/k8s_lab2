@@ -83,3 +83,11 @@ https://graspingtech.com/install-docker-ansible/
 https://www.digitalocean.com/community/tutorials/how-to-set-up-ansible-inventories
 https://linuxhandbook.com/clone-git-ansible/
 https://stackoverflow.com/questions/2505096/clone-a-private-repository-github
+
+
+## Docker Swarm
+
+* https://github.com/testdrivenio/flask-docker-swarm
+* https://dockerswarm.rocks/
+* https://github.com/thomvaill/tads-boilerplate
+* https://github.com/kcrebound/docker-swarm-traefik-fastapi-nuxt

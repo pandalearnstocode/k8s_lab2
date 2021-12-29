@@ -1,0 +1,135 @@
+version: "3.7"
+
+services:
+  app_service:
+    container_name: app_service
+    build: ./app_service
+    command: uvicorn app.main:app --reload --workers 1 --host 0.0.0.0 --port 8000
+    volumes:
+      - ./app_service:/usr/src/app
+      - ./config.py:/usr/src/app/app/config.py:ro
+    env_file: 
+      - .env
+    depends_on:
+      - project_db_service
+    deploy:
+      replicas: 2
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.app_service.rule=Host(`api.localhost`)"
+        - "traefik.http.routers.app_service.entrypoints=web"
+        - "traefik.http.services.app_service-service.loadbalancer.server.port=8000"
+    networks:
+      - inbound
+  client_service:
+    container_name: client_service
+    build: ./client_service
+    command: streamlit run app/main.py --server.address="0.0.0.0" --server.port="80"
+    env_file: 
+      - .env
+    volumes:
+      - ./client_service:/usr/src/app
+      - ./config.py:/usr/src/app/app/config.py:ro
+    deploy:
+      replicas: 2
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.client_service.rule=Host(`localhost`)"
+        - "traefik.http.routers.client_service.entrypoints=web"
+        - "traefik.http.services.client_service-service.loadbalancer.server.port=80"
+    networks:
+      - inbound
+
+  traefik:
+    image: traefik:v2.0.4
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker.swarmMode=true"
+      - "--providers.docker.endpoint=unix:///var/run/docker.sock"
+      - "--providers.docker.exposedbydefault=false"
+      - "--providers.docker.network=traefik"
+      - "--entrypoints.web.address=:80"
+      - "--entryPoints.websecure.address=:443"
+      - "--certificatesresolvers.le.acme.httpchallenge=true"
+      - "--certificatesresolvers.le.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.le.acme.email=testmail@gmail.lol"
+      - "--certificatesresolvers.le.acme.storage=/letsencrypt/acme.json"
+
+      - "--metrics.prometheus=true"
+      - "--metrics.prometheus.buckets=0.1,0.3,1.2,5.0"
+    ports:
+      - "80:80"
+      - "8080:8080"
+      - "443:443"
+    networks:
+      - traefik
+      - inbound
+    volumes:
+      - "./letsencrypt:/letsencrypt"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus/prometheus-swarm.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    networks:
+      - inbound
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.prometheus.rule=Host(`prometheus.localhost`)"
+        - "traefik.http.routers.prometheus.entrypoints=web"
+        - "traefik.http.services.prometheus-service.loadbalancer.server.port=9090"
+        - "traefik.docker.network=inbound"
+      placement:
+        constraints:
+          - node.role==manager
+      restart_policy:
+        condition: on-failure
+
+  grafana:
+    image: grafana/grafana
+    depends_on:
+      - prometheus
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning/:/etc/grafana/provisioning/
+    env_file:
+      - ./grafana/config.monitoring
+    networks:
+      - inbound
+    user: "104"
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.grafana.rule=Host(`grafana.localhost`)"
+        - "traefik.http.routers.grafana.entrypoints=web"
+        - "traefik.http.services.grafana-service.loadbalancer.server.port=3000"
+        - "traefik.docker.network=inbound"
+      placement:
+        constraints:
+          - node.role == manager
+      restart_policy:
+        condition: on-failure
+
+networks:
+  traefik:
+    driver: overlay
+    name: traefik
+  inbound:
+    driver: overlay
+    name: inbound
+
+volumes:
+    prometheus_data: {}
+    grafana_data: {}
