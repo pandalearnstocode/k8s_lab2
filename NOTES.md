@@ -69,3 +69,17 @@ __Required subdomains:__
 * logs.myrandomapp.online
 * dbmonitoring.randomapp.online
 * prometheus.myrandomapp.online
+
+
+## Ansible
+
+https://www.the-digital-life.com/deploy-docker-with-ansible/
+https://github.com/xcad2k/ansible-boilerplates
+https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-ansible-on-ubuntu-20-04
+https://pypi.org/project/ansible/
+https://alexgallacher.com/auto-update-docker-containers-by-setting-up-watchtower/
+https://www.rechberger.io/tutorial-install-docker-using-ansible-on-a-remote-server/
+https://graspingtech.com/install-docker-ansible/
+https://www.digitalocean.com/community/tutorials/how-to-set-up-ansible-inventories
+https://linuxhandbook.com/clone-git-ansible/
+https://stackoverflow.com/questions/2505096/clone-a-private-repository-github

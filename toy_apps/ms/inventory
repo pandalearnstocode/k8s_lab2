@@ -1,0 +1,7 @@
+[ansibletest]
+ansibletest
+
+[ansibletest:vars]
+ansible_host=20.204.109.172
+ansible_ssh_private_key_file=~/.ssh/ansibletest_key.pem
+ansible_user=azureuser
