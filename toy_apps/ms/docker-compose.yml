@@ -27,13 +27,13 @@ services:
       - project_db_service
   project_db_service:
     container_name: project_db_service
-    image: postgres:13.4
+    build: ./project_db
     environment:
       - POSTGRES_USER=pguser
       - POSTGRES_PASSWORD=pgpassword
       - POSTGRES_DB=project_db
   datalake_db_service:
-    image: postgres:13.4
+    build: ./datalake_db
     container_name: datalake_db_service
     environment:
       - POSTGRES_USER=pguser
@@ -45,6 +45,7 @@ services:
     command: uvicorn app.main:app --reload --workers 1 --host 0.0.0.0 --port 8000
     volumes:
       - ./data_service:/usr/src/app
+      - ./config.py:/usr/src/app/app/config.py:ro
     ports:
       - 8003:8000
     env_file: 
@@ -52,7 +53,7 @@ services:
     depends_on:
       - datalake_db_service
   prometheus_service:
-    image: prom/prometheus:latest
+    build: ./prometheus
     restart: unless-stopped
     container_name: prometheus_service
     ports:
@@ -64,7 +65,7 @@ services:
     depends_on:
       - app_service
   grafana_service:
-    image: grafana/grafana:latest
+    build: ./grafana
     restart: unless-stopped
     user: "472"
     container_name: grafana_service
@@ -77,13 +78,14 @@ services:
     env_file: 
       - .env
   redis_service:
-    image: redis:latest
+    build: ./redis
     container_name: redis_service
     ports:
       - "6379:6379"
     env_file: 
       - .env
   rabbitmq_service:
+    build: ./rabbitmq
     hostname: rabbitmq_service
     container_name: rabbitmq_service
     image: rabbitmq:latest
@@ -131,9 +133,11 @@ services:
     ports:
       - 5555:5555
   logger_service:
+    build: ./dozzle_logger
     container_name: logger_service
-    image: amir20/dozzle:latest
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
       - 9999:8080
+    env_file: 
+      - .env
